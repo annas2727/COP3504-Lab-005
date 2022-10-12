@@ -90,14 +90,20 @@ if __name__ == "__main__":
 using namespace std;
 
 int linear_search(vector<string> container, string element) {
+<<<<<<< Updated upstream
     for(int i = 0; i < container.size(); i++) {
         if (container[i] == element) {
+=======
+    int i;
+    for (i = 0; i < container.size(); i++) {
+        if (container[i] == element)
+>>>>>>> Stashed changes
             return i;
-        }
     }
     return -1;
 }
 
+<<<<<<< Updated upstream
 int binary_search(vector<string> container, string element) {
     int left = 0;
     int right = container.size() - 1;
@@ -134,3 +140,47 @@ int main() {
     cout << "Linear search for 'aaaaa': " << linear_search(dataset, "aaaaa") << "\n";
     cout << "Binary search for 'aaaaa': " << binary_search(dataset, "aaaaa");
 }
+=======
+int binary_search(vector<string>container, string element)
+{
+    int min_index = 0, max_index = container.size() - 1, mid_index = 0;
+    while (min_index <= max_index)
+    {
+        mid_index = (min_index + max_index) / 2;
+        if (container[mid_index] == element){
+            return mid_index;
+        }
+        else if (element.compare(container[mid_index]) < 0){ //if negative, string A comes before string b
+            max_index = mid_index - 1;
+        }
+        else{
+            min_index = mid_index + 1;
+        }
+    }
+    return -1;
+}
+
+void linear_timer(vector<string>data, string element){
+    int start, end;
+    start = systemTimeNanoseconds();
+    cout << "Linear search index for '" << element << "': " << linear_search(data, element) << endl;
+    end = systemTimeNanoseconds();
+    cout << "Linear time for '" << element << "': " << end-start << endl;
+}
+
+void binary_timer(vector<string>data, string element){
+    int start, end;
+    start = systemTimeNanoseconds();
+    cout << "Binary search index for '" << element << "': " << binary_search(data, element) << endl;
+    end = systemTimeNanoseconds();
+    cout << "Binary time for '" << element << "': " << end-start << endl;
+}
+
+int main(){
+    vector <string> data = getStringData();
+    linear_timer(data, "aaaaa"); binary_timer(data, "aaaaa");
+    linear_timer(data, "mzzzz"); binary_timer(data, "mzzzz");
+    linear_timer(data, "not_here"); binary_timer(data, "not_here");
+    return 0;
+}
+>>>>>>> Stashed changes
